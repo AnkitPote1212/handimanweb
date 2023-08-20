@@ -1,0 +1,9 @@
+@import '~bootstrap-icons/font/bootstrap-icons.css';
+.sticky-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa; /* Adjust the background color as needed */
+    padding: 20px; /* Adjust the padding as needed */
+  }

@@ -1,0 +1,403 @@
+<section class="h-100 gradient-custom-2">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-lg-9 col-xl-7">
+        <div class="card" *ngIf="userDetailObject.role === 'HANDIMAN_USER'">
+          <div *ngIf="!enableHandimanEdit">
+            <div
+              class="rounded-top text-white d-flex flex-row"
+              style="background-color: #1f1f24; height: 200px"
+            >
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+                <img
+                  [src]="userDetailObject.profileImage"
+                  alt="Generic placeholder image"
+                  class="img-fluid img-thumbnail mt-4 mb-2"
+                  style="width: 150px; height: 160px; z-index: 1"
+                />
+                <button
+                  class="find-handiman-btn"
+                  *ngIf="!enableHandimanEdit"
+                  (click)="editHandiman()"
+                  type="submit"
+                  style="z-index: 1"
+                >
+                  Edit profile
+                </button>
+                <!-- <a class="btn-book-a-table"  (click)="logout()">Edit profile</a> -->
+                <!-- <button class="find-handiman-btn" type="submit">Submit</button> -->
+              </div>
+              <div class="ms-3" style="margin-top: 130px">
+                <h2>
+                  {{ userDetailObject.firstName }}
+                  {{ userDetailObject.lastName }}
+                </h2>
+                <!-- <p>New York</p> -->
+              </div>
+            </div>
+
+            <div class="card-body p-4 text-black" style="margin-top: 75px">
+              <div class="mb-5">
+                <p class="lead fw-normal mb-1">About</p>
+                <div class="p-4" style="background-color: #f8f9fa">
+                  <p class="font-italic mb-1">{{ userDetailObject.aboutMe }}</p>
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col mb-3">
+                  Email : <span>{{ userDetailObject.email }}</span>
+                </div>
+                <div class="col mb-3">
+                  Contact Number : {{ userDetailObject.contactNumber }}
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col mb-3">City : {{ userDetailObject.city }}</div>
+                <div class="col mb-3">
+                  Pincodes : {{ userDetailObject.postalCode[0] }}
+                </div>
+              </div>
+              <div class="row g-2">
+                <div class="col">
+                  Service : {{ userDetailObject.serviceProvided }}
+                </div>
+                <div class="col">
+                  <a [href]="userDetailObject.resumeUrl" target="_blank"
+                    >Click here to open the resume</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="enableHandimanEdit">
+            <form
+              [formGroup]="editHandimanUser"
+              (ngSubmit)="onSubmit('HandimanUser')"
+            >
+              <div
+                class="rounded-top text-white d-flex flex-row"
+                style="background-color: #1f1f24; height: 200px"
+              >
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+                  <!-- <img [src]="userDetailObject.profileImage" alt="Generic placeholder image"
+                    class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px;height: 160px; z-index: 1"> -->
+                  <label for="profileImage" class="image-upload">
+                    <input
+                      id="profileImage"
+                      type="file"
+                      (change)="onFileSelected($event)"
+                      accept="image/*"
+                    />
+                    <div
+                      class="preview"
+                      *ngIf="selectedImage"
+                      style="height: 150px; width: 150px"
+                    >
+                      <img
+                        [src]="imagePreview"
+                        alt="Selected Image"
+                        style="height: 150px; width: 150px"
+                      />
+                    </div>
+                    <div class="placeholder" *ngIf="!selectedImage">
+                      <img
+                        [src]="userDetailObject.profileImage"
+                        alt="Selected Image"
+                        style="height: 150px; width: 150px"
+                      />
+                      <span>Select an profile image</span>
+                    </div>
+                  </label>
+                  <!-- <a class="btn-book-a-table"  (click)="logout()">Edit profile</a> -->
+                  <!-- <button class="find-handiman-btn" type="submit">Submit</button> -->
+                </div>
+                <div class="ms-3" style="margin-top: 130px">
+                  <div class="row">
+                    <div class="col-3">
+                      <input
+                        type="text"
+                        id="firstName"
+                        class="form-control form-control-lg"
+                        formControlName="firstName"
+                      />
+                    </div>
+                    <div class="col-3">
+                      <input
+                        type="text"
+                        id="lastName"
+                        class="form-control form-control-lg"
+                        formControlName="lastName"
+                      />
+                    </div>
+                  </div>
+                  <!-- <p>New York</p> -->
+                </div>
+              </div>
+              <div class="card-body p-4 text-black" style="margin-top: 75px">
+                <div class="mb-5">
+                  <p class="lead fw-normal mb-1">About</p>
+                  <div class="p-4" style="background-color: #f8f9fa">
+                    <textarea
+                      matInput
+                      name="Write about yourself"
+                      cols="80"
+                      rows="8"
+                      formControlName="aboutMe"
+                      placeholder="Write about yourself"
+                      required
+                      style="border: 1px solid #000"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col mb-3">
+                    Email :
+                    <input
+                      type="email"
+                      readonly
+                      id="emailAddress"
+                      class="form-control form-control-lg"
+                      formControlName="email"
+                    />
+                  </div>
+                  <div class="col mb-3">
+                    Contact Number :
+                    <input
+                      type="number"
+                      id="emailAddress"
+                      class="form-control form-control-lg"
+                      formControlName="contactNumber"
+                    />
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col mb-3">
+                    City :<br />
+                    <mat-form-field style="width: 279px">
+                      <mat-select
+                        placeholder="Select City"
+                        formControlName="city"
+                        (selectionChange)="onCitySelected($event)"
+                      >
+                        <mat-select-filter
+                          [placeholder]="'Please select city'"
+                          [array]="variablesCityList"
+                          (filteredReturn)="CityList = $event"
+                        ></mat-select-filter>
+                        <mat-option
+                          *ngFor="let item of CityList"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col mb-3">
+                    Pincodes : <br />
+                    <mat-form-field>
+                      <mat-select
+                        placeholder="Select Pincode"
+                        formControlName="pinCodes"
+                        [disabled]="!isCitySelected()"
+                      >
+                        <mat-select-filter
+                          [placeholder]="'Please select sevice'"
+                          [array]="variablesPostalCodeList"
+                          (filteredReturn)="PostalCodeList = $event"
+                        ></mat-select-filter>
+                        <mat-option
+                          *ngFor="let item of PostalCodeList"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row g-2">
+                  <div class="col">
+                    Service :<br />
+                    <mat-form-field style="width: 279px">
+                      <mat-select
+                        placeholder="Select Service"
+                        formControlName="service"
+                      >
+                        <mat-select-filter
+                          [placeholder]="'Please select service'"
+                          [array]="variablesServiceList"
+                          (filteredReturn)="ServiceList = $event"
+                        ></mat-select-filter>
+                        <mat-option
+                          *ngFor="let item of ServiceList"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <a [href]="userDetailObject.resumeUrl" target="_blank"
+                      >Click here to open the resume</a
+                    >
+                    <label for="resumeUrl" class="document-upload">
+                      <input
+                        id="resumeUrl"
+                        type="file"
+                        (change)="onFileSelectedDocs($event)"
+                        accept=".pdf,.doc,.docx"
+                      />
+                      <!-- <button class="upload-button" (click)="uploadDocument()">Upload</button> -->
+                      <div class="selected-document" *ngIf="selectedDocument">
+                        Selected Document: {{ selectedDocument.name }}
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="find-handiman-btn"
+                type="submit"
+                style="margin-left: 3pc; margin-bottom: 2pc"
+              >
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          *ngIf="
+            userDetailObject.role === 'APP_USER' ||
+            userDetailObject.role === 'ROLE_ADMIN'
+          "
+        >
+          <div *ngIf="!enableUserEdit">
+            <div
+              class="rounded-top text-white d-flex flex-row"
+              style="background-color: #1f1f24; height: 200px"
+            >
+              <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSojnGX_5EJ3giw4qUsRh-ccuBx7irsjKC6jr-v2xoTWg&s"
+                  alt="Generic placeholder image"
+                  class="img-fluid img-thumbnail mt-4 mb-2"
+                  style="width: 150px; height: 160px; z-index: 1"
+                />
+                <button
+                  type="button"
+                  class="find-handiman-btn"
+                  type="submit"
+                  style="z-index: 1"
+                  (click)="editUser()"
+                >
+                  Edit profile
+                </button>
+                <!-- <a class="btn-book-a-table"  (click)="logout()">Edit profile</a> -->
+                <!-- <button class="find-handiman-btn" type="submit">Submit</button> -->
+              </div>
+              <div class="ms-3" style="margin-top: 130px">
+                <h2>
+                  {{ userDetailObject.firstName }}
+                  {{ userDetailObject.lastName }}
+                </h2>
+                <!-- <p>New York</p> -->
+              </div>
+            </div>
+            <div class="card-body p-4 text-black" style="margin-top: 75px">
+              <div class="row g-2">
+                <div class="col mb-3">Email : {{ userDetailObject.email }}</div>
+                <div class="col mb-3">City : {{ userDetailObject.city }}</div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="enableUserEdit">
+            <form [formGroup]="editUserForm" (ngSubmit)="onSubmit('appUser')">
+              <div
+                class="rounded-top text-white d-flex flex-row"
+                style="background-color: #1f1f24; height: 200px"
+              >
+                <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px">
+                  <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSojnGX_5EJ3giw4qUsRh-ccuBx7irsjKC6jr-v2xoTWg&s"
+                    alt="Generic placeholder image"
+                    class="img-fluid img-thumbnail mt-4 mb-2"
+                    style="width: 150px; height: 160px; z-index: 1"
+                  />
+                  <!-- <a class="btn-book-a-table"  (click)="logout()">Edit profile</a> -->
+                  <!-- <button class="find-handiman-btn" type="submit">Submit</button> -->
+                </div>
+                <div class="ms-3" style="margin-top: 130px">
+                  <div class="row">
+                    <div class="col-3">
+                      <input
+                        type="text"
+                        id="firstName"
+                        class="form-control form-control-lg"
+                        formControlName="firstName"
+                      />
+                    </div>
+                    <div class="col-3">
+                      <input
+                        type="text"
+                        id="lastName"
+                        class="form-control form-control-lg"
+                        formControlName="lastName"
+                      />
+                    </div>
+                  </div>
+                  <!-- <p>New York</p> -->
+                </div>
+              </div>
+              <div class="card-body p-4 text-black" style="margin-top: 75px">
+                <div class="row g-2">
+                  <div class="col mb-3">
+                    Email :
+                    <input
+                      type="email"
+                      readonly
+                      id="emailAddress"
+                      class="form-control form-control-lg"
+                      formControlName="email"
+                    />
+                  </div>
+                  <div class="col mb-3">
+                    City : <br /><mat-form-field style="width: 279px">
+                      <mat-select
+                        placeholder="Select City"
+                        formControlName="city"
+                        (selectionChange)="onCitySelected($event)"
+                      >
+                        <mat-select-filter
+                          [placeholder]="'Please select city'"
+                          [array]="variablesCityList"
+                          (filteredReturn)="CityList = $event"
+                        ></mat-select-filter>
+                        <mat-option
+                          *ngFor="let item of CityList"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="find-handiman-btn"
+                type="submit"
+                style="margin-left: 3pc; margin-bottom: 2pc"
+              >
+                Update
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

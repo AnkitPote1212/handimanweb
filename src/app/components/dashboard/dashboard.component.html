@@ -1,0 +1,25 @@
+<div class="bootstrap-wrapper">
+    <div class="container align-center mt">
+        <h1>Welcome to admin panel</h1>
+        <button type="button" class="btn btn-success" (click)="getUser()">Get Details</button>
+    </div>
+
+<div class="container">
+<table class="table mt2">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>++1</td>
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+        </tr>
+    </tbody>
+  </table>
+</div>
+</div>

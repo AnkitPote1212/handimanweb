@@ -1,0 +1,37 @@
+
+.align-center{
+    text-align: center;
+}
+.mt{
+    margin-top: 20px;
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px; /* Adjust the value to change the spacing */
+}
+
+.slide-image {
+  max-width: 70%; /* Adjust the value to change the image size */
+  height: auto;
+}
+.city-name {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+}
+.image-container img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+

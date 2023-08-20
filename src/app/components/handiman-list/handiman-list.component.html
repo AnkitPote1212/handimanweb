@@ -1,0 +1,82 @@
+<section id="hero" class="hero d-flex section-bg">
+  <div class="container">
+    <div class="row justify-content-between gy-5" *ngIf="!unapprovedList">
+      <h2 data-aos="fade-up" style="text-align: center; font-size: 25px">
+        Please select your city and other details
+      </h2>
+      <form [formGroup]="dropDownForm" (ngSubmit)="onSubmit()">
+        <div class="row" style="text-align: center">
+          <div class="col-4">
+            <mat-form-field>
+              <mat-select
+                placeholder="Select Service"
+                formControlName="service"
+              >
+                <mat-select-filter
+                  [placeholder]="'Please select sevice'"
+                  [array]="variablesServiceList"
+                  (filteredReturn)="ServiceList = $event"
+                ></mat-select-filter>
+                <mat-option *ngFor="let item of ServiceList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-select
+                placeholder="Select City"
+                formControlName="city"
+                (selectionChange)="onCitySelected($event)"
+              >
+                <mat-select-filter
+                  [placeholder]="'Please select service'"
+                  [array]="variablesCityList"
+                  (filteredReturn)="CityList = $event"
+                ></mat-select-filter>
+                <mat-option *ngFor="let item of CityList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col-4">
+            <mat-form-field>
+              <mat-select
+                placeholder="Select Pincode"
+                formControlName="pincode"
+                [disabled]="!isCitySelected()"
+              >
+                <mat-select-filter
+                  [placeholder]="'Please select sevice'"
+                  [array]="variablesPostalCodeList"
+                  (filteredReturn)="PostalCodeList = $event"
+                ></mat-select-filter>
+                <mat-option *ngFor="let item of PostalCodeList" [value]="item">
+                  {{ item }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div style="text-align: center">
+          <button
+            class="find-handiman-btn"
+            type="submit"
+            [disabled]="dropDownForm.invalid"
+          >
+            Click here to find services
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <app-filtered-handiman
+      *ngIf="showList || unapprovedList"
+      [handimanInfos]="handimanInfo"
+      [additionalValue]="unapprovedList ? yourAdditionalValue : null"
+    ></app-filtered-handiman>
+  </div>
+</section>

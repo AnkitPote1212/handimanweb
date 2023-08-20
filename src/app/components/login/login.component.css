@@ -1,0 +1,50 @@
+.align-center{
+    text-align: center;
+}
+.mt{
+    margin-top: 20px;
+}
+.mt2{
+    margin-top: 40px;
+}
+.image-width{
+    width: 125px;
+}
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #f093fb;
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to bottom right, rgba(240, 147, 251, 1), rgba(245, 87, 108, 1))
+    }
+    
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 2.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+    .find-handiman-btn{
+        color: #fff;
+        background: rgba(206, 18, 18, 0.8);
+        font-size: 14px;
+        color: #fff;
+        background: var(--color-primary);
+        padding: 8px 20px;
+        border-radius: 50px;
+        transition: 0.3s;
+        margin-top: 0%;
+    }
+    .outer-div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        /* Add any other styling for the outer div if needed */
+      }

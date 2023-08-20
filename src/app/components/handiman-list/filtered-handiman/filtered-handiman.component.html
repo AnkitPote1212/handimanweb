@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="col" *ngFor="let profile of handimanInfos">
+    <div
+      class="row"
+      style="
+        background-color: rgba(241, 221, 221, 0.8);
+        border-radius: 120px;
+        margin-top: 2%;
+      "
+    >
+      <div class="col-2">
+        <img
+          src="{{ profile.profileImage }}"
+          class="img-fluid"
+          alt=""
+          data-aos="zoom-out"
+          data-aos-delay="300"
+        />
+      </div>
+      <div class="col-2" style="padding-top: 15px">
+        Name: {{ profile.firstName }} {{ profile.lastName }}<br />
+        City: {{ profile.city }}<br />
+        Service provided: {{ profile.serviceProvided }}<br />
+        <!-- Experiance: {{ profile.experiance }}<br /> -->
+        Contact No: {{ profile.contactNumber }}<br />
+        Email: {{ profile.email }}
+        <br />
+
+        <a
+          [href]="profile.resumeUrl"
+          target="_blank"
+          *ngIf="additionalValue != null"
+          >Click here to open the resume</a
+        >
+        <br />
+        <button
+          *ngIf="additionalValue != null"
+          class="find-handiman-btn"
+          type="submit"
+          (click)="approveHandiman(profile.email)"
+        >
+          Approve
+        </button>
+        <br />
+      </div>
+      <div class="col-7" style="padding-top: 15px">
+        <p>{{ profile.aboutMe }}</p>
+      </div>
+    </div>
+  </div>
+</div>

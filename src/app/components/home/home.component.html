@@ -1,0 +1,54 @@
+<!-- <div class="bootstrap-wrapper">
+    <div class="container">
+        <h1 class="align-center mt">Welcome to login page</h1>
+    </div>
+</div> -->
+<section id="hero" class="hero d-flex align-items-center section-bg">
+    <div class="container">
+      <div class="row justify-content-between gy-5">
+        <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center align-items-center align-items-lg-start text-center text-lg-start">
+          <h2 data-aos="fade-up">Find your</h2><br/><h2 data-aos="fade-up">Handyman</h2>
+          <p data-aos="fade-up" data-aos-delay="100">Excellence in plumbing, electrician, and cleaning services. Trust our experts for superior results. Experience top-notch service with us!</p>
+          <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+            <a href="#book-a-table" class="btn-book-a-table" routerLink="/handymanList">Click here to find services</a>
+            <!-- <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a> -->
+          </div>
+        </div>
+        <div class="col-lg-5 order-1 order-lg-2 text-center text-lg-start">
+          <img src="assets/img/test2.png" class="img-fluid" alt="" data-aos="zoom-out" data-aos-delay="300">
+        </div>
+      </div>
+      <!-- <div class="align-center"><p>I want to a find Plumber in my area</p></div> -->
+    </div>
+    
+</section>
+<section id="about" class="about">
+  <div class="container" data-aos="fade-up">
+
+    <div class="section-header">
+      <!-- <h2>About Us</h2> -->
+      <p>Now we are present in <span>Major Cities</span></p>
+    </div>
+    <swiper [config]="config">
+      <div class=" swiper-wrapper">
+        <div class="swiper-slide align-center" *ngFor="let city of cities">
+          <!-- <div class="swiper-slide align-center"> -->
+            <div class="image-container">
+              <img class="slide-image" [src]=city.cityImage alt="img 1" (click)="handleImageClick(city.cityName)"><div class="city-name">{{city.cityName}}</div>
+           <!-- </div> -->
+         </div>
+        </div>
+      </div>
+     
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+     
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </swiper>
+
+  </div>
+</section>
+
+
