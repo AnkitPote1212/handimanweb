@@ -42,49 +42,237 @@
     </div>
 </div> -->
 <section id="hero" class="hero d-flex align-items-center section-bg">
-    <div class="container">
-      <div class="row justify-content-between gy-5" style="margin-left: 30%; margin-right: 30%;">
-        <h1 data-aos="fade-up" style="text-align: center">Please Login</h1>
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-            <div class="card-body p-4 p-md-5">
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="container">
+    <div
+      class="row justify-content-between gy-5"
+      style="margin-left: 30%; margin-right: 30%"
+    >
+      <h1 data-aos="fade-up" style="text-align: center">Please Login</h1>
+      <div
+        class="card shadow-2-strong card-registration"
+        style="border-radius: 15px"
+      >
+        <div class="card-body p-4 p-md-5">
+          <form
+            [formGroup]="loginForm"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!isShowForgotEmail"
+          >
             <div>
-                <!-- <div class="col-3"></div> -->
-                <div >
-                    <div class="mb-3">
-                        <div
-                            *ngIf="invalidCredential"
-                            class="text-danger">
-                            Invalid credential!! username or password must be wrong.
-                          </div>
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1"
-                            aria-describedby="emailHelp" formControlName="email">
-                            <div
-                            *ngIf="loginForm.controls.email.invalid && loginForm.controls.email.touched"
-                            class="text-danger">
-                            Please enter valid email.
-                          </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1"
-                            formControlName="password">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <div class="outer-div">
-                        <button class="find-handiman-btn" [disabled]="loginForm.invalid" type="submit">Login</button>
-                     </div>   
+              <!-- <div class="col-3"></div> -->
+              <div>
+                <div class="mb-3">
+                  <div *ngIf="invalidCredential" class="text-danger">
+                    Invalid credential!! username or password must be wrong.
+                  </div>
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="
+                      loginForm.controls.email.invalid &&
+                      loginForm.controls.email.touched
+                    "
+                    class="text-danger"
+                  >
+                    Please enter valid email.
+                  </div>
                 </div>
-                <!-- <div class="col-3"></div> -->
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label"
+                    >Password</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="exampleInputPassword1"
+                    formControlName="password"
+                  />
+                </div>
+                <div class="mb-3 form-check">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    id="exampleCheck1"
+                  />
+                  <label class="form-check-label" for="exampleCheck1"
+                    >Check me out</label
+                  >
+                </div>
+                <div class="row outer-div">
+                  <div class="col-6">
+                    <button
+                      class="find-handiman-btn"
+                      [disabled]="loginForm.invalid"
+                      type="submit"
+                    >
+                      Login
+                    </button>
+                  </div>
+                  <div
+                    class="col-6"
+                    style="text-align: right; font-size: 0.8pc"
+                  >
+                    <a (click)="forgotPassword()">Forgot password?</a>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="col-3"></div> -->
             </div>
-        </form>
+          </form>
+          <form
+            [formGroup]="forgotForm"
+            (ngSubmit)="onSubmitEmail()"
+            *ngIf="isShowForgotEmail && !isShowPasscode"
+          >
+            <div>
+              <!-- <div class="col-3"></div> -->
+              <div
+                *ngIf="showEmailNotRegistered"
+                class="text-danger"
+                style="margin-bottom: 1pc"
+              >
+                <b>Email is not registered with Handyman !!</b>
+              </div>
+              <div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label"
+                    >Email address</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    formControlName="email"
+                  />
+                  <div
+                    *ngIf="
+                      forgotForm.controls.email.invalid &&
+                      forgotForm.controls.email.touched
+                    "
+                    class="text-danger"
+                  >
+                    Please enter valid email.
+                  </div>
+                </div>
+                <div class="row outer-div">
+                  <div class="col-6">
+                    <button
+                      class="find-handiman-btn"
+                      [disabled]="forgotForm.invalid"
+                      type="submit"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                  <div
+                    class="col-6"
+                    style="text-align: right; font-size: 0.8pc"
+                  ></div>
+                </div>
+              </div>
+              <!-- <div class="col-3"></div> -->
+            </div>
+          </form>
+          <div *ngIf="isShowPasscode">
+            <h3 style="text-align: center">
+              <b *ngIf="!wrongPin"
+                >Please enter the six digit passcode received on
+                <span
+                  style="
+                    color: rgba(206, 18, 18, 0.8);
+                    text-decoration: underline;
+                  "
+                  >{{ registeredEmail }}</span
+                ></b
+              >
+              <b *ngIf="wrongPin"
+                ><span class="text-danger">Wrong Pin ! </span>please enter the
+                six digit passcode received on
+                <span
+                  style="
+                    color: rgba(206, 18, 18, 0.8);
+                    text-decoration: underline;
+                  "
+                  >{{ registeredEmail }}</span
+                ></b
+              >
+              <div style="margin-top: 4pc">
+                <ng-otp-input
+                  #ngOtpInput
+                  (onInputChange)="onOtpChange($event)"
+                  [config]="config"
+                ></ng-otp-input>
+                <!-- <button
+                  class="find-handiman-btn mt-5"
+                  type="submit"
+                  (click)="submitPin()"
+                  [disabled]="otp.length !== 6"
+                >
+                  Submit Pin
+                </button> -->
+              </div>
+              <br /><br />
+            </h3>
+            <form [formGroup]="conformPwdForm" (ngSubmit)="onSubmit()">
+              <input
+                type="password"
+                id="password"
+                class="form-control form-control-lg"
+                formControlName="password"
+              />
+              <label class="form-label" for="password">Password</label><br />
+              <span
+                *ngIf="
+                  conformPwdForm.controls.password.invalid &&
+                  conformPwdForm.controls.password.touched
+                "
+                class="text-danger"
+                ><br />
+                The password must be at least 8 characters long and contain at
+                least one uppercase letter (A-Z), one lowercase letter (a-z),
+                and one digit (0-9).
+              </span>
+              <br />
+              <input
+                type="text"
+                id="confirmPassword"
+                class="form-control form-control-lg"
+                formControlName="confirmPassword"
+              />
+              <label class="form-label" for="confirmPassword"
+                >Conform Password</label
+              >
+              <span
+                *ngIf="
+                  !arePasswordsEqualHandiman() &&
+                  conformPwdForm.controls.confirmPassword.touched
+                "
+                class="text-danger"
+                ><br />
+                Password and Conform password must be same
+              </span>
+              <button
+                class="find-handiman-btn"
+                [disabled]="
+                  !arePasswordsEqualHandiman() || conformPwdForm.invalid
+                "
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
-        </div>
-        
       </div>
     </div>
+  </div>
 </section>
