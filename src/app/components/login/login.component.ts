@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ForgotPasswordDetails } from 'src/app/models/forgot-password-details';
 import { LoginCredential } from 'src/app/models/login-credential';
 import { PinVerification } from 'src/app/models/pin-verification';
 import { TokenJwt } from 'src/app/models/token-jwt';
@@ -22,6 +23,7 @@ export class LoginComponent implements OnInit {
   forgotForm: FormGroup | any;
   conformPwdForm: FormGroup | any;
   credntial: LoginCredential | any;
+  forgotPwdDetail: ForgotPasswordDetails | any;
   tokenValue: TokenJwt | any;
   jwtToken: string | any;
   invalidCredential: boolean = false;
@@ -139,5 +141,22 @@ export class LoginComponent implements OnInit {
     const password = this.conformPwdForm.get('password').value;
     const confirmPassword = this.conformPwdForm.get('confirmPassword').value;
     return password === confirmPassword;
+  }
+  submitForgotPassword() {
+    console.log('detail submitted');
+    this.forgotPwdDetail = new ForgotPasswordDetails(
+      this.registeredEmail,
+      this.otp,
+      this.conformPwdForm.get('password').value
+    );
+    this.loginService.submitForgotPwd(this.forgotPwdDetail).subscribe(
+      (response) => {
+        console.log(response);
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.wrongPin = true;
+      }
+    );
   }
 }

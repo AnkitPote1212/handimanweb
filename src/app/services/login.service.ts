@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginCredential } from '../models/login-credential';
 import { TokenJwt } from '../models/token-jwt';
+import { ForgotPasswordDetails } from '../models/forgot-password-details';
 
 @Injectable({
   providedIn: 'root',
@@ -37,5 +38,8 @@ export class LoginService {
   }
   forgotpassword(email: string) {
     return this.http.post(`${this.url}/home/forgotpassword`, email);
+  }
+  submitForgotPwd(forgotPwdDetail: ForgotPasswordDetails) {
+    return this.http.post(`${this.url}/home/forgotPwdDetail`, forgotPwdDetail);
   }
 }

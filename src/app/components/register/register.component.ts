@@ -107,7 +107,10 @@ export class RegisterComponent implements OnInit {
       confirmPassword: new FormControl('', Validators.required),
       imageUpload: new FormControl(null, Validators.required),
       documentUpload: new FormControl(null, Validators.required),
-      aboutMe: new FormControl('', Validators.required),
+      aboutMe: new FormControl('', [
+        Validators.required,
+        Validators.minLength(150),
+      ]),
     });
     this.userRegisterForm = new FormGroup({
       firstName: new FormControl('', [
