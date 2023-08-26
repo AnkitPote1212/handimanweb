@@ -30,4 +30,7 @@ export class CityServiceService {
   getUnApprovedHandimanList() {
     return this.http.get(`${this.url}/admin/getUnApprovedList`);
   }
+  addCity(formdata: FormData) {
+    return this.http.post(`${this.url}/home/addCity`, formdata);
+  }
 }

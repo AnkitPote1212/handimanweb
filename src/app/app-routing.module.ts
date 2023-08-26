@@ -9,6 +9,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthGuard } from './services/auth.guard';
+import { OnboardingComponentComponent } from './components/onboarding-component/onboarding-component.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,12 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent,
     pathMatch: 'full',
+  },
+  {
+    path: 'onboard',
+    component: OnboardingComponentComponent,
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
 ];
 

@@ -1,0 +1,169 @@
+<section id="hero" class="hero d-flex section-bg">
+  <div class="container">
+    <div class="row justify-content-between gy-5" *ngIf="action == 'city'">
+      <h2 data-aos="fade-up" style="text-align: center; font-size: 25px">
+        Please select your city and other details
+      </h2>
+      <form [formGroup]="onboardCityForm" (ngSubmit)="onboardCity()">
+        <div class="row" style="text-align: center"></div>
+        <div class="row">
+          <div class="col-4 mb-4" style="text-align: center">
+            <div>
+              <span>Select City Image</span><br />
+              <span class="text-danger"
+                >Note: Dimansion of image must be 600x300.</span
+              >
+            </div>
+            <br />
+            <label for="imageUpload" class="image-upload">
+              <input
+                id="imageUpload"
+                type="file"
+                (change)="onFileSelected($event)"
+                accept="image/*"
+              />
+              <div class="preview" *ngIf="selectedImage">
+                <img [src]="imagePreview" alt="Selected Image" />
+              </div>
+              <div class="placeholder" *ngIf="!selectedImage">
+                <span>Select an profile image</span>
+              </div>
+            </label>
+          </div>
+          <!-- <div class="col-4"></div> -->
+          <div class="col-4">
+            <div class="form-outline">
+              <label class="form-label" for="cityName">City Name</label>
+              <div
+                *ngIf="
+                  onboardCityForm.controls.cityName.invalid &&
+                  onboardCityForm.controls.cityName.touched
+                "
+                class="text-danger"
+              >
+                cityName is required and should contain only alphabets.
+              </div>
+              <input
+                type="text"
+                id="cityName"
+                class="form-control form-control-lg"
+                formControlName="cityName"
+                style="margin-top: 1pc"
+              />
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-outline">
+              <label class="form-label" for="cityName">City Pincodes</label>
+              <div
+                *ngIf="
+                  onboardCityForm.controls.pincodes.invalid &&
+                  onboardCityForm.controls.pincodes.touched
+                "
+                class="text-danger"
+              >
+                Pincodes is mandatory field and pincode must 6 digit long.
+              </div>
+              <input
+                type="text"
+                [(ngModel)]="newpin"
+                class="form-control form-control-lg"
+                formControlName="pincodes"
+                style="margin-top: 1pc"
+              />
+              <button
+                (click)="addName()"
+                class="find-handiman-btn"
+                style="margin-top: 1pc"
+                [disabled]="
+                  onboardCityForm.controls.pincodes.invalid &&
+                  onboardCityForm.controls.pincodes.touched
+                "
+              >
+                Add Pincodes
+              </button>
+            </div>
+            <ul>
+              <li *ngFor="let name of pincodes">
+                {{ name }}
+                <button
+                  (click)="removeName(name)"
+                  class="delete-button"
+                  style="background-color: rgba(206, 18, 18, 0.8)"
+                >
+                  X
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div style="text-align: center">
+          <button
+            class="find-handiman-btn"
+            type="submit"
+            [disabled]="onboardCityForm.invalid"
+            (click)="isOnboardClicked = true"
+          >
+            Onboard City
+          </button>
+        </div>
+      </form>
+      <!-- <div col-4>
+        <div>
+          <input type="text" [(ngModel)]="newpin" placeholder="Enter a name" />
+          <button (click)="addName()">Add</button>
+        </div>
+        <ul>
+          <li *ngFor="let name of pincodes">
+            {{ name }}
+            <button (click)="removeName(name)" class="delete-button">X</button>
+          </li>
+        </ul>
+      </div> -->
+    </div>
+    <div class="row justify-content-between gy-5" *ngIf="action == 'service'">
+      <h2 data-aos="fade-up" style="text-align: center; font-size: 25px">
+        Please enter service you want to onboard.
+      </h2>
+      <form [formGroup]="onboardServiceForm" (ngSubmit)="onboardService()">
+        <div class="row" style="text-align: center"></div>
+        <div class="row">
+          <!-- <div class="col-4"></div> -->
+          <div class="col-4">
+            <div class="form-outline">
+              <label class="form-label" for="serviceName"
+                >Enter service name you want onboard.</label
+              >
+              <div
+                *ngIf="
+                  onboardServiceForm.controls.serviceName.invalid &&
+                  onboardServiceForm.controls.serviceName.touched
+                "
+                class="text-danger"
+              >
+                Service name is required field and should contain only
+                alphabets.
+              </div>
+              <input
+                type="text"
+                id="serviceName"
+                class="form-control form-control-lg"
+                formControlName="serviceName"
+                style="margin-top: 1pc"
+              />
+            </div>
+          </div>
+          <div style="text-align: center" class="col-4 mt-5">
+            <button
+              class="find-handiman-btn"
+              type="submit"
+              [disabled]="onboardServiceForm.invalid"
+            >
+              Onboard Service
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

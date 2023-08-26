@@ -54,4 +54,14 @@ export class AppComponent implements OnInit {
       queryParams: { unapproved: true },
     });
   }
+  onboardCity() {
+    this.router.navigate(['/onboard'], {
+      queryParams: { onboard: 'city' },
+    });
+  }
+  onboardService() {
+    this.router.navigate(['/onboard'], {
+      queryParams: { onboard: 'service' },
+    });
+  }
 }

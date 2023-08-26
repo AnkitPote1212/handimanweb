@@ -28,6 +28,7 @@ import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AboutComponent } from './components/about/about.component';
 import { NgOtpInputModule } from 'ng-otp-input';
+import { OnboardingComponentComponent } from './components/onboarding-component/onboarding-component.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { NgOtpInputModule } from 'ng-otp-input';
     RegisterComponent,
     ProfileComponent,
     AboutComponent,
+    OnboardingComponentComponent,
   ],
   imports: [
     BrowserModule,
